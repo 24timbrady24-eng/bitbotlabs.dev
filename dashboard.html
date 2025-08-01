@@ -1,40 +1,70 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to BitBotLabs</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f4f8ff;
-      color: #1a1a1a;
-      text-align: center;
-      padding: 5em 2em;
-    }
-    h1 {
-      color: #0057ff;
-      font-size: 2.5em;
-    }
-    p {
-      margin-top: 1em;
-      font-size: 1.25em;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 2em;
-      padding: 1em 2em;
-      background: #0057ff;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BotLogix™ Product DNA Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Welcome to BotLogix™</h1>
-  <p>Your binary-powered product lab starts here.</p>
-  <a href="dashboard.html" class="button">Enter Dashboard</a>
+<header>
+  <h1>BotLogix™ Product DNA Dashboard</h1>
+  <div id="bithumor-quote" class="bithumor">Loading BitHumor™...</div>
+</header>
+
+  <main class="dashboard">
+    <section class="card" id="ptvr-display">
+      <h2>PTVR Display (Product Timeline Visual Representation)</h2>
+      <div class="timeline">
+        <div class="timeline-item">Phase 1: Ideation <span class="status complete">Complete</span></div>
+        <div class="timeline-item">Phase 2: Development <span class="status inprogress">In Progress</span></div>
+        <div class="timeline-item">Phase 3: Deployment <span class="status pending">Pending</span></div>
+        <div class="timeline-item">Phase 4: Maintenance <span class="status pending">Pending</span></div>
+      </div>
+    </section>
+
+    <section class="card" id="bibbot-controls">
+      <h2>BibBot Deployment Controls</h2>
+      <button onclick="deployBibBot()">Deploy BibBot</button>
+      <button onclick="checkBibBotStatus()">Check Status</button>
+      <div id="bibbot-status">Status: Idle</div>
+    </section>
+
+    <section class="card" id="sku-health-graph">
+      <h2>SKU Health Graph</h2>
+      <select id="sku-select" onchange="updateSKU()">
+        <option value="SKU-TEST">SKU-TEST (Default)</option>
+        <option value="SKU-001">SKU-001</option>
+      </select>
+      <canvas id="skuChart" width="400" height="200"></canvas>
+    </section>
+
+    <section class="card" id="lifebits">
+      <h2>Lifebits™</h2>
+      <ul id="lifebits-list">
+        <!-- Populated via JS -->
+      </ul>
+    </section>
+
+    <section class="card" id="hidden-cost-analyzer">
+      <h2>Hidden Cost Analyzer™</h2>
+      <input type="number" id="cost-input" placeholder="Enter base cost" />
+      <button onclick="analyzeCosts()">Analyze</button>
+      <div id="cost-output">Hidden Costs: N/A</div>
+    </section>
+
+    <section class="card" id="huddle-room-triggers">
+      <h2>Huddle Room Triggers</h2>
+      <button onclick="launchHuddleRoom()">Launch Huddle Room</button>
+      <div id="huddle-status">Ready for launch</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by Dashboard Sim Engine™ | © 2025 BitBot Labs</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
