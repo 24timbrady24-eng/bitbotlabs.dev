@@ -109,7 +109,7 @@
         <h1>BotLogix™ Product DNA Dashboard</h1>
         <div id="bithumor-quote" class="bithumor">Loading BitHumor™...</div>
     </header>
-   
+  
     <main>
         <section id="ptvr-display">
             <h2>PTVR Display</h2>
@@ -120,14 +120,14 @@
                 <div class="timeline-item">Maintenance <span class="status pending">Pending</span></div>
             </div>
         </section>
-       
+      
         <section id="bibbot-controls">
             <h2>BibBot Deployment Controls</h2>
             <button onclick="deployBibBot()">Deploy BibBot</button>
             <button onclick="checkBibBotStatus()">Check Status</button>
             <div id="bibbot-status">Status: Idle</div>
         </section>
-       
+      
         <section id="sku-health-graph">
             <h2>SKU Health Graph</h2>
             <select id="sku-select" onchange="updateSKU()">
@@ -136,19 +136,19 @@
             </select>
             <canvas id="skuChart"></canvas>
         </section>
-       
+      
         <section id="lifebits">
             <h2>Lifebits™</h2>
             <ul id="lifebits-list"></ul>
         </section>
-       
+      
         <section id="hidden-cost-analyzer">
             <h2>Hidden Cost Analyzer™</h2>
             <input type="number" id="cost-input" placeholder="Enter base cost" min="0">
             <button onclick="analyzeCosts()">Analyze</button>
             <div id="cost-output">Hidden Costs: N/A</div>
         </section>
-       
+      
         <section id="huddle-room-triggers">
             <h2>Huddle Room Triggers</h2>
             <div id="huddle-directory">
@@ -158,11 +158,11 @@
             </div>
         </section>
     </main>
-   
+  
     <footer>
         <p>Powered by Dashboard Sim Engine™ | © 2025 BitBot Labs</p>
     </footer>
-   
+  
     <div id="huddle-config-modal">
         <div id="huddle-config-content">
             <h3 id="room-name">Huddle Room Config</h3>
@@ -187,5 +187,7 @@
             <button id="close-config" style="position: absolute; top: 10px; right: 10px; padding: 6px 12px; border: none; background-color: #1d4ed8; color: white; border-radius: 4px; cursor: pointer;">Close</button>
         </div>
     </div>
-   
+  
 <script src="script.js"></script>
+</body>
+</html>
