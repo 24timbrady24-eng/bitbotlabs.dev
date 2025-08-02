@@ -1,21 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script loaded at:', new Date());
-    const deployButton = document.querySelector('#deploy-btn');
-    if (deployButton) {
-        deployButton.addEventListener('click', function() {
-            console.log('BibBot deployment started!');
-            this.textContent = 'Deploying...';
-            const statusDiv = document.querySelector('#bibbot-status');
-            if (statusDiv) {
-                statusDiv.textContent = 'Status: Deploying';
-                setTimeout(() => {
-                    statusDiv.textContent = 'Status: Deployed';
-                    console.log('BibBot deployed successfully!');
-                    this.textContent = 'Deploy BibBot';
-                }, 1000);
-            }
-        });
-    } else {
-        console.log('Button not found!');
-    }
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotLogix™ Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <section id="lifebits">
+    <h2>Lifebits™</h2>
+    <ul id="lifebits-list">
+      <li>Lifebit 1: Active</li>
+      <li>Lifebit 2: Confirmed</li>
+    </ul>
+  </section>
+  <section id="bibbot-controls">
+    <h2>BibBot Deployment</h2>
+    <button id="deploy-btn" style="min-width: 120px;">Deploy BibBot</button>
+    <div id="bibbot-status">Status: Idle</div>
+    <div id="huddle-status">Ready</div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
