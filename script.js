@@ -1,7 +1,6 @@
 // Minimal Debug Script
 try {
     console.log('Script loaded successfully!'); // Confirm script runs
-
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOM ready, initializing...'); // Confirm DOM loaded
 
