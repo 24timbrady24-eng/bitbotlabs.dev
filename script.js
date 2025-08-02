@@ -1,152 +1,193 @@
-// Dashboard Sim Engine™ - Simulated logic for BotLogix™ Dashboard
-try {
-    // BitHumor™ Quotes Rotation
-    const bitHumorQuotes = [
-        "Why did the bit flip? To get to the other side!",
-        "Bits walk into a bar: 'We're feeling a bit off today.'",
-        "A bit's favorite music? Binary beats.",
-        "Don't trust atoms, they make up everything... but bits make up data!"
-    ];
-    let quoteIndex = 0;
-    function rotateQuote() {
-        try {
-            const quoteElement = document.getElementById('bithumor-quote');
-            if (quoteElement) {
-                quoteElement.textContent = bitHumorQuotes[quoteIndex];
-                quoteIndex = (quoteIndex + 1) % bitHumorQuotes.length;
-            }
-        } catch (e) {
-            console.error('BitHumor Rotation Error:', e);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotLogix™ Product DNA Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+        #huddle-directory {
+            margin: 20px 0;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-    }
-    setInterval(rotateQuote, 5000);
-    rotateQuote();
-
-    // BibBot Deployment Controls
-    function deployBibBot() {
-        try {
-            const statusElement = document.getElementById('bibbot-status');
-            statusElement.textContent = 'Status: Deploying...';
-            setTimeout(() => {
-                statusElement.textContent = 'Status: Deployed Successfully!';
-            }, 1500);
-        } catch (e) {
-            console.error('BibBot Deploy Error:', e);
+        .bot-icon {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #0d6efd;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            margin-right: 10px;
+            cursor: pointer;
         }
-    }
-
-    function checkBibBotStatus() {
-        try {
-            document.getElementById('bibbot-status').textContent = 'Status: Online and Operational';
-        } catch (e) {
-            console.error('BibBot Status Error:', e);
+        .bot-icon:hover {
+            background: #0056b3;
         }
-    }
-
-    // SKU Health Graph
-    let skuChart;
-    const skuData = {
-        'SKU-TEST': [85, 90, 75, 80, 95],
-        'SKU-001': [65, 70, 60, 75, 85]
-    };
-
-    function updateSKU() {
-        try {
-            const sku = document.getElementById('sku-select').value;
-            const data = skuData[sku] || [0, 0, 0, 0, 0];
-            const ctx = document.getElementById('skuChart').getContext('2d');
-
-            if (skuChart) skuChart.destroy();
-            skuChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
-                    datasets: [{
-                        label: `${sku} Health`,
-                        data: data,
-                        borderColor: '#0d6efd',
-                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Health Score' } },
-                        x: { title: { display: true, text: 'Time' } }
-                    },
-                    plugins: { legend: { display: true } }
-                }
-            });
-        } catch (e) {
-            console.error('SKU Chart Error:', e);
+        .edit-pencil {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #0d6efd;
         }
-    }
-
-    // Lifebits™
-    const lifebitsData = [
-        'Core Functionality: Stable',
-        'User Engagement: High',
-        'Performance: Optimized',
-        'Security: Reinforced'
-    ];
-
-    function loadLifebits() {
-        try {
-            const list = document.getElementById('lifebits-list');
-            lifebitsData.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                list.appendChild(li);
-            });
-        } catch (e) {
-            console.error('Lifebits Error:', e);
+        #team-name-input {
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-    }
-
-    // Hidden Cost Analyzer™
-    function analyzeCosts() {
-        try {
-            const baseCost = parseFloat(document.getElementById('cost-input').value) || 0;
-            const hiddenCosts = baseCost * 0.2 + Math.random() * 100;
-            document.getElementById('cost-output').textContent = `Hidden Costs: $${hiddenCosts.toFixed(2)} (20% overhead + variables)`;
-        } catch (e) {
-            console.error('Hidden Cost Analyzer Error:', e);
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1d4ed8;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            animation: spin 1s linear infinite;
+            margin-right: 5px;
+            display: inline-block;
         }
-    }
-
-    // Huddle Room Directory and Launcher Logic
-    let invitedBots = [];
-
-    function launchHuddleRoom() {
-    try {
-        console.log('Function triggered!'); // First debug point
-        const statusElement = document.getElementById('huddle-status');
-        if (!statusElement) {
-            console.error('Status element not found!');
-            return;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        console.log('Status element found:', statusElement); // Second debug point
-        statusElement.textContent = 'Attempting to launch...';
-
-        // Minimal modal test
-        const modal = document.createElement('div');
-        modal.id = 'huddle-modal';
-        modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;';
-        const content = document.createElement('div');
-        content.style.cssText = 'background: white; padding: 20px; margin: auto;';
-        content.textContent = 'Test Modal';
-        modal.appendChild(content);
-        document.body.appendChild(modal);
-        console.log('Modal added to body'); // Third debug point
-
-    } catch (e) {
-        console.error('Launch Error:', e);
-        statusElement.textContent = 'Launch Failed - Check Console';
-    }
-}
-
-    // Bot Directory Interaction
-    const bots = [
-        { name:
+        #huddle-config-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        #huddle-config-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            margin: 50px auto;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #huddle-config-content.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .bot-avatar {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #0d6efd;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 60px;
+            margin: 5px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+        .bot-avatar.selected {
+            box-shadow: 0 0 10px #0d6efd;
+        }
+        .theme-preview {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BotLogix™ Product DNA Dashboard</h1>
+        <div id="bithumor-quote" class="bithumor">Loading BitHumor™...</div>
+    </header>
+    
+    <main>
+        <section id="ptvr-display">
+            <h2>PTVR Display</h2>
+            <div class="timeline">
+                <div class="timeline-item">Ideation <span class="status complete">Complete</span></div>
+                <div class="timeline-item">Development <span class="status in-progress">In Progress</span></div>
+                <div class="timeline-item">Deployment <span class="status pending">Pending</span></div>
+                <div class="timeline-item">Maintenance <span class="status pending">Pending</span></div>
+            </div>
+        </section>
+        
+        <section id="bibbot-controls">
+            <h2>BibBot Deployment Controls</h2>
+            <button onclick="deployBibBot()">Deploy BibBot</button>
+            <button onclick="checkBibBotStatus()">Check Status</button>
+            <div id="bibbot-status">Status: Idle</div>
+        </section>
+        
+        <section id="sku-health-graph">
+            <h2>SKU Health Graph</h2>
+            <select id="sku-select" onchange="updateSKU()">
+                <option value="SKU-TEST">SKU-TEST (Default)</option>
+                <option value="SKU-001">SKU-001</option>
+            </select>
+            <canvas id="skuChart"></canvas>
+        </section>
+        
+        <section id="lifebits">
+            <h2>Lifebits™</h2>
+            <ul id="lifebits-list"></ul>
+        </section>
+        
+        <section id="hidden-cost-analyzer">
+            <h2>Hidden Cost Analyzer™</h2>
+            <input type="number" id="cost-input" placeholder="Enter base cost" min="0">
+            <button onclick="analyzeCosts()">Analyze</button>
+            <div id="cost-output">Hidden Costs: N/A</div>
+        </section>
+        
+        <section id="huddle-room-triggers">
+            <h2>Huddle Room Triggers</h2>
+            <div id="huddle-directory">
+                <input type="text" id="team-name-input" value="Team Alpha" placeholder="Team Name">
+                <button onclick="launchHuddleRoom()">Launch Huddle Room</button>
+                <div id="huddle-status">Ready for launch</div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Powered by Dashboard Sim Engine™ | © 2025 BitBot Labs</p>
+    </footer>
+    
+    <div id="huddle-config-modal">
+        <div id="huddle-config-content">
+            <h3 id="room-name">Huddle Room Config</h3>
+            <form id="huddle-config">
+                <label>Room Size:</label><br>
+                <input type="radio" name="size" value="Small" checked> Small
+                <input type="radio" name="size" value="Medium"> Medium
+                <input type="radio" name="size" value="Massive"> Massive
+                <br><br>
+                <label>Select Style:</label>
+                <select name="theme">
+                    <option value="neon">Neon Grid</option>
+                    <option value="minimal">Minimal Gray</option>
+                    <option value="terminal">Terminal Mode</option>
+                </select>
+                <div class="theme-preview">Preview will update...</div>
+                <br><br>
+                <label>Choose Bots:</label>
+                <div class="bot-avatar-list"></div>
+                <button type="submit">Deploy Room</button>
+            </form>
+            <button id="close-config" style="position: absolute; top: 10px; right: 10px; padding: 6px 12px; border: none; background-color: #1d4ed8; color: white; border-radius: 4px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+    
+    <script src="/script.js"></script>
+</body>
+</html>
