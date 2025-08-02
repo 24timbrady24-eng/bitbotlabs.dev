@@ -1,193 +1,31 @@
-/* Welcome Page Styles */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f0f4fc;
-    color: #222;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
 }
-
-.welcome-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-}
-
 h1 {
-    font-size: 2.8rem;
-    color: #0057ff;
+  color: #0057ff;
 }
-
-p {
-    font-size: 1.2rem;
-    margin: 1rem 0 2rem;
-    color: #444;
-}
-
-.launch-btn {
-    background-color: #0057ff;
-    color: white;
-    font-size: 1rem;
-    padding: 0.8rem 1.6rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.launch-btn:hover {
-    background-color: #0040c1;
-}
-
-footer {
-    position: absolute;
-    bottom: 10px;
-    font-size: 0.9rem;
-    color: #888;
-}
-
-/* Dashboard Styles */
-main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
 section {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
 }
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-h2 {
-    margin: 0 0 15px;
-    color: #0057ff;
-    font-size: 1.5rem;
-}
-
-.timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.timeline-item {
-    background: #e9ecef;
-    padding: 10px 15px;
-    border-left: 4px solid #0057ff;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.status {
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 12px;
-}
-
-.status.complete { background: #d4edda; color: #155724; }
-.status.in-progress { background: #fff3cd; color: #856404; }
-.status.pending { background: #f8d7da; color: #721c24; }
-
 button {
-    background: #0057ff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: background 0.3s ease;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #0057ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
 button:hover {
-    background: #0040c1;
+  background: #0040c1;
 }
-
-select, input[type="number"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 200px;
-    margin-bottom: 10px;
-}
-
-canvas {
-    max-width: 100%;
-    height: auto;
-}
-
 ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 0;
-}
-
-#huddle-config-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-#huddle-config-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
-    margin: 50px auto;
-    position: relative;
-}
-
-.bot-avatar {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    background: #0057ff;
-    border-radius: 50%;
-    color: white;
-    text-align: center;
-    line-height: 60px;
-    margin: 5px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-.bot-avatar.selected {
-    box-shadow: 0 0 10px #0057ff;
-}
-
-.theme-preview {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-@media (max-width: 600px) {
-    body { padding: 10px; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.2rem; }
-    main { grid-template-columns: 1fr; }
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
 }
