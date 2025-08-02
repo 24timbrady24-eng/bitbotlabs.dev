@@ -4,7 +4,7 @@ function launchHuddleRoom() {
         const statusElement = document.getElementById('huddle-status');
         if (!statusElement) throw new Error('Huddle status element not found');
 
-        statusElement.textContent = 'Launching Huddle Room...';
+        statusElement.innerHTML = '<span class="loader"></span> Launching...'; // Spinner during launch
 
         // Create modal
         const modal = document.createElement('div');
@@ -20,7 +20,12 @@ function launchHuddleRoom() {
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         `;
+        setTimeout(() => {
+            modal.style.opacity = '1'; // Animated fade-in
+        }, 10);
 
         const roomContent = document.createElement('div');
         roomContent.style.cssText = `
@@ -31,19 +36,60 @@ function launchHuddleRoom() {
             max-width: 600px;
             position: relative;
         `;
+        roomContent.innerHTML = `
+            <h3 style="font-size: 1.6rem; margin-bottom: 10px;">🚀 Huddle Room Initiated</h3>
+            <p style="margin-bottom: 20px;">Welcome to your real-time workspace. Ready to deploy ideas.</p>
+        `; // Styled content
 
-        // Basic Content
-        const title = document.createElement('h3');
-        title.textContent = 'Huddle Room (Test)';
+        // Circle Indicator (placeholder for now)
+        const indicator = document.createElement('div');
+        indicator.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #0d6efd;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        `;
+        indicator.textContent = '0'; // Placeholder count
+
+        // Close Button with upgraded styling
         const closeBtn = document.createElement('button');
         closeBtn.textContent = 'Close';
-        closeBtn.style.cssText = `position: absolute; top: 10px; left: 10px; padding: 5px 10px;`;
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            border: none;
+            background-color: #1d4ed8;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        `;
         closeBtn.onclick = () => {
             document.body.removeChild(modal);
             statusElement.textContent = 'Huddle Room Closed';
         };
 
-        roomContent.appendChild(title);
+        // ESC Key to Close
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                modal.remove();
+                statusElement.textContent = 'Huddle Room Closed';
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
+
+        // Assemble Modal
+        roomContent.appendChild(indicator);
         roomContent.appendChild(closeBtn);
         modal.appendChild(roomContent);
         document.body.appendChild(modal);
