@@ -94,12 +94,19 @@ try {
 
     function loadLifebits() {
         try {
+            console.log('Loading Lifebits...'); // Debug: Confirm function runs
             const list = document.getElementById('lifebits-list');
+            if (!list) {
+                console.error('Lifebits list element not found!');
+                return;
+            }
+            list.innerHTML = ''; // Clear existing
             lifebitsData.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 list.appendChild(li);
             });
+            console.log('Lifebits loaded successfully');
         } catch (e) {
             console.error('Lifebits Error:', e);
         }
@@ -194,6 +201,7 @@ try {
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         try {
+            console.log('DOM loaded, initializing...'); // Debug: Confirm DOM ready
             document.getElementById('sku-select').value = 'SKU-TEST';
             updateSKU();
             loadLifebits();
