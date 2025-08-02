@@ -1,37 +1,62 @@
-* {
-    box-sizing: border-box;
-}
-
+/* Welcome Page Styles */
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background: #f0f4fc;
     color: #222;
 }
 
-header {
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 h1 {
-    color: #0057ff;
     font-size: 2.8rem;
+    color: #0057ff;
 }
 
-.bithumor {
-    font-style: italic;
-    color: #444;
+p {
     font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    color: #444;
 }
 
+.launch-btn {
+    background-color: #0057ff;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.launch-btn:hover {
+    background-color: #0040c1;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Dashboard Styles */
 main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px 0;
 }
 
 section {
@@ -39,6 +64,11 @@ section {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 h2 {
@@ -109,13 +139,6 @@ ul {
     margin: 0;
 }
 
-footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #888;
-    font-size: 0.9rem;
-}
-
 #huddle-config-modal {
     display: none;
     position: fixed;
@@ -135,14 +158,6 @@ footer {
     max-width: 500px;
     margin: 50px auto;
     position: relative;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#huddle-config-content.active {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .bot-avatar {
