@@ -1,70 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BotLogix™ Product DNA Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-<script src="dashboard.js"></script> <!-- if needed -->
-</head>
-<body>
-<header>
-  <h1>BotLogix™ Product DNA Dashboard</h1>
-  <div id="bithumor-quote" class="bithumor">Loading BitHumor™...</div>
-</header>
+// Minimal Debug Script
+try {
+    console.log('Script loaded successfully!'); // Confirm script runs
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM ready, initializing...'); // Confirm DOM loaded
 
-  <main class="dashboard">
-    <section class="card" id="ptvr-display">
-      <h2>PTVR Display (Product Timeline Visual Representation)</h2>
-      <div class="timeline">
-        <div class="timeline-item">Phase 1: Ideation <span class="status complete">Complete</span></div>
-        <div class="timeline-item">Phase 2: Development <span class="status inprogress">In Progress</span></div>
-        <div class="timeline-item">Phase 3: Deployment <span class="status pending">Pending</span></div>
-        <div class="timeline-item">Phase 4: Maintenance <span class="status pending">Pending</span></div>
-      </div>
-    </section>
+        // Test Lifebits
+        const lifebitsList = document.getElementById('lifebits-list');
+        if (lifebitsList) {
+            lifebitsList.innerHTML = '<li>Test Lifebit</li>';
+            console.log('Lifebits test added');
+        } else {
+            console.error('Lifebits list not found!');
+        }
 
-    <section class="card" id="bibbot-controls">
-      <h2>BibBot Deployment Controls</h2>
-      <button onclick="deployBibBot()">Deploy BibBot</button>
-      <button onclick="checkBibBotStatus()">Check Status</button>
-      <div id="bibbot-status">Status: Idle</div>
-    </section>
-
-    <section class="card" id="sku-health-graph">
-      <h2>SKU Health Graph</h2>
-      <select id="sku-select" onchange="updateSKU()">
-        <option value="SKU-TEST">SKU-TEST (Default)</option>
-        <option value="SKU-001">SKU-001</option>
-      </select>
-      <canvas id="skuChart" width="400" height="200"></canvas>
-    </section>
-
-    <section class="card" id="lifebits">
-      <h2>Lifebits™</h2>
-      <ul id="lifebits-list">
-        <!-- Populated via JS -->
-      </ul>
-    </section>
-
-    <section class="card" id="hidden-cost-analyzer">
-      <h2>Hidden Cost Analyzer™</h2>
-      <input type="number" id="cost-input" placeholder="Enter base cost" />
-      <button onclick="analyzeCosts()">Analyze</button>
-      <div id="cost-output">Hidden Costs: N/A</div>
-    </section>
-
-    <section class="card" id="huddle-room-triggers">
-      <h2>Huddle Room Triggers</h2>
-      <button onclick="launchHuddleRoom()">Launch Huddle Room</button>
-      <div id="huddle-status">Ready for launch</div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Powered by Dashboard Sim Engine™ | © 2025 BitBot Labs</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+        // Test Huddle Room Button
+        const launchBtn = document.querySelector('#huddle-room-triggers button');
+        if (launchBtn) {
+            launchBtn.onclick = () => {
+                console.log('Huddle Room button clicked!');
+                const status = document.getElementById('huddle-status');
+                if (status) {
+                    status.textContent = 'Launching...';
+                    const modal = document.createElement('div');
+                    modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;';
+                    const content = document.createElement('div');
+                    content.style.cssText = 'background: white; padding: 20px; margin: 50px auto; width: 300px;';
+                    content.textContent = 'Huddle Room Test';
+                    modal.appendChild(content);
+                    document.body.appendChild(modal);
+                    console.log('Modal created');
+                } else {
+                    console.error('Huddle status not found!');
+                }
+            };
+        } else {
+            console.error('Huddle Room button not found!');
+        }
+    });
+} catch (e) {
+    console.error('Script Error:', e);
+}
