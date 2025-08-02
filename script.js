@@ -51,7 +51,7 @@ try {
             }
         });
     } else {
-        console.error('Window object not available, script halted');
+        console.error('Window object not available, script halted at:', new Date().toISOString());
     }
 } catch (e) {
     console.error('Script Error at:', new Date().toISOString(), e);
