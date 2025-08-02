@@ -21,7 +21,6 @@ try {
     }
     setInterval(rotateQuote, 5000);
     rotateQuote();
-
     // BibBot Deployment Controls
     function deployBibBot() {
         try {
@@ -41,7 +40,6 @@ try {
             console.error('BibBot Status Error:', e);
         }
     }
-
     // SKU Health Graph
     let skuChart;
     const skuData = {
@@ -57,7 +55,6 @@ try {
             console.error('SKU Chart Error:', e);
         }
     }
-
     // Lifebits™
     const lifebitsData = [
         'Core Functionality: Stable',
@@ -77,7 +74,6 @@ try {
             console.error('Lifebits Error:', e);
         }
     }
-
     // Hidden Cost Analyzer™
     function analyzeCosts() {
         try {
@@ -88,7 +84,6 @@ try {
             console.error('Hidden Cost Analyzer Error:', e);
         }
     }
-
     // Huddle Room Launcher
     function launchHuddleRoom() {
         try {
@@ -102,7 +97,6 @@ try {
             console.error('Huddle Room Error:', e);
         }
     }
-
     // Initialize and Add Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
         try {
