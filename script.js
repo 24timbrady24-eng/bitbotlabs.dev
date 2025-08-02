@@ -1,13 +1,14 @@
 // Minimal Debug Script
 try {
     console.log('Script loaded successfully!'); // Confirm script runs
+
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOM ready, initializing...'); // Confirm DOM loaded
 
         // Test Lifebits
         const lifebitsList = document.getElementById('lifebits-list');
         if (lifebitsList) {
-            lifebitsList.innerHTML = '<li>Test Lifebit</li>';
+            lifebitsList.innerHTML = '<li>Test Lifebit</li>'; // Fixed: Single li item
             console.log('Lifebits test added');
         } else {
             console.error('Lifebits list not found!');
@@ -26,6 +27,14 @@ try {
                     const content = document.createElement('div');
                     content.style.cssText = 'background: white; padding: 20px; margin: 50px auto; width: 300px;';
                     content.textContent = 'Huddle Room Test';
+                    const closeBtn = document.createElement('button');
+                    closeBtn.textContent = 'Close';
+                    closeBtn.style.cssText = 'margin-top: 10px; padding: 5px 10px;';
+                    closeBtn.onclick = () => {
+                        document.body.removeChild(modal);
+                        status.textContent = 'Huddle Room Closed';
+                    };
+                    content.appendChild(closeBtn);
                     modal.appendChild(content);
                     document.body.appendChild(modal);
                     console.log('Modal created');
