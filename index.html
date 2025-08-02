@@ -1,193 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BotLogix™ Product DNA Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-    <style>
-        #huddle-directory {
-            margin: 20px 0;
-            padding: 15px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .bot-icon {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background: #0d6efd;
-            border-radius: 50%;
-            color: white;
-            text-align: center;
-            line-height: 50px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-        .bot-icon:hover {
-            background: #0056b3;
-        }
-        .edit-pencil {
-            margin-left: 5px;
-            cursor: pointer;
-            color: #0d6efd;
-        }
-        #team-name-input {
-            padding: 5px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1d4ed8;
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-            animation: spin 1s linear infinite;
-            margin-right: 5px;
-            display: inline-block;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #huddle-config-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-        #huddle-config-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 500px;
-            margin: 50px auto;
-            position: relative;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        #huddle-config-content.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .bot-avatar {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            background: #0d6efd;
-            border-radius: 50%;
-            color: white;
-            text-align: center;
-            line-height: 60px;
-            margin: 5px;
-            cursor: pointer;
-            transition: box-shadow 0.3s ease;
-        }
-        .bot-avatar.selected {
-            box-shadow: 0 0 10px #0d6efd;
-        }
-        .theme-preview {
-            margin-top: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to BotLogix™</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4fc;
+      color: #222;
+    }
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.8rem;
+      color: #0057ff;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 1rem 0 2rem;
+      color: #444;
+    }
+    .launch-btn {
+      background-color: #0057ff;
+      color: white;
+      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .launch-btn:hover {
+      background-color: #0040c1;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>BotLogix™ Product DNA Dashboard</h1>
-        <div id="bithumor-quote" class="bithumor">Loading BitHumor™...</div>
-    </header>
-   
-    <main>
-        <section id="ptvr-display">
-            <h2>PTVR Display</h2>
-            <div class="timeline">
-                <div class="timeline-item">Ideation <span class="status complete">Complete</span></div>
-                <div class="timeline-item">Development <span class="status in-progress">In Progress</span></div>
-                <div class="timeline-item">Deployment <span class="status pending">Pending</span></div>
-                <div class="timeline-item">Maintenance <span class="status pending">Pending</span></div>
-            </div>
-        </section>
-       
-        <section id="bibbot-controls">
-            <h2>BibBot Deployment Controls</h2>
-            <button onclick="deployBibBot()">Deploy BibBot</button>
-            <button onclick="checkBibBotStatus()">Check Status</button>
-            <div id="bibbot-status">Status: Idle</div>
-        </section>
-       
-        <section id="sku-health-graph">
-            <h2>SKU Health Graph</h2>
-            <select id="sku-select" onchange="updateSKU()">
-                <option value="SKU-TEST">SKU-TEST (Default)</option>
-                <option value="SKU-001">SKU-001</option>
-            </select>
-            <canvas id="skuChart"></canvas>
-        </section>
-       
-        <section id="lifebits">
-            <h2>Lifebits™</h2>
-            <ul id="lifebits-list"></ul>
-        </section>
-       
-        <section id="hidden-cost-analyzer">
-            <h2>Hidden Cost Analyzer™</h2>
-            <input type="number" id="cost-input" placeholder="Enter base cost" min="0">
-            <button onclick="analyzeCosts()">Analyze</button>
-            <div id="cost-output">Hidden Costs: N/A</div>
-        </section>
-       
-        <section id="huddle-room-triggers">
-            <h2>Huddle Room Triggers</h2>
-            <div id="huddle-directory">
-                <input type="text" id="team-name-input" value="Team Alpha" placeholder="Team Name">
-                <button onclick="launchHuddleRoom()">Launch Huddle Room</button>
-                <div id="huddle-status">Ready for launch</div>
-            </div>
-        </section>
-    </main>
-   
-    <footer>
-        <p>Powered by Dashboard Sim Engine™ | © 2025 BitBot Labs</p>
-    </footer>
-   
-    <div id="huddle-config-modal">
-        <div id="huddle-config-content">
-            <h3 id="room-name">Huddle Room Config</h3>
-            <form id="huddle-config">
-                <label>Room Size:</label><br>
-                <input type="radio" name="size" value="Small" checked> Small
-                <input type="radio" name="size" value="Medium"> Medium
-                <input type="radio" name="size" value="Massive"> Massive
-                <br><br>
-                <label>Select Style:</label>
-                <select name="theme">
-                    <option value="neon">Neon Grid</option>
-                    <option value="minimal">Minimal Gray</option>
-                    <option value="terminal">Terminal Mode</option>
-                </select>
-                <div class="theme-preview">Preview will update...</div>
-                <br><br>
-                <label>Choose Bots:</label>
-                <div class="bot-avatar-list"></div>
-                <button type="submit">Deploy Room</button>
-            </form>
-            <button id="close-config" style="position: absolute; top: 10px; right: 10px; padding: 6px 12px; border: none; background-color: #1d4ed8; color: white; border-radius: 4px; cursor: pointer;">Close</button>
-        </div>
-    </div>
-   
-    <script src="script.js"></script>
+  <div class="welcome-container">
+    <h1>Welcome to BotLogix™</h1>
+    <p>A smarter way to manage Product DNA, SKUs, and Lifebits™.</p>
+    <button class="launch-btn" onclick='location.href="dashboard.html"'>
+      Launch Product Dashboard
+    </button>
+  </div>
+  <footer>© 2025 BitBot Labs</footer>
 </body>
 </html>
