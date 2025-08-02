@@ -116,15 +116,106 @@ try {
         }
     }
 
-    // Huddle Room Launcher
+    // Huddle Room Launcher Logic
     function launchHuddleRoom() {
         try {
             const statusElement = document.getElementById('huddle-status');
             statusElement.textContent = 'Launching Huddle Room...';
+
+            // Create modal for Huddle Room
+            const modal = document.createElement('div');
+            modal.id = 'huddle-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            `;
+
+            const roomContent = document.createElement('div');
+            roomContent.style.cssText = `
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                width: 80%;
+                max-width: 600px;
+                position: relative;
+            `;
+
+            // Circle Indicator (Top Right)
+            const indicator = document.createElement('div');
+            indicator.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                background: #0d6efd;
+                border-radius: 50%;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+            `;
+            let participantCount = 0;
+
+            // Room Type Selection
+            const roomSelect = document.createElement('select');
+            roomSelect.innerHTML = `
+                <option value="small">Small Meeting (1-2 Bots)</option>
+                <option value="large">Large Conference (Up to 5 Bots)</option>
+            `;
+            roomSelect.onchange = () => updateRoom(roomSelect.value);
+
+            // Bot Face Placeholders
+            const botContainer = document.createElement('div');
+            botContainer.id = 'bot-container';
+            botContainer.style.cssText = `display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;`;
+
+            function updateRoom(roomType) {
+                botContainer.innerHTML = '';
+                participantCount = roomType === 'small' ? 2 : 5;
+                indicator.textContent = participantCount;
+                for (let i = 0; i < participantCount; i++) {
+                    const botWindow = document.createElement('div');
+                    botWindow.style.cssText = `width: 100px; height: 100px; background: #e9ecef; display: flex; justify-content: center; align-items: center; border: 1px solid #ccc; border-radius: 4px;`;
+                    botWindow.textContent = `Bot ${i + 1} Placeholder`;
+                    botContainer.appendChild(botWindow);
+                }
+            }
+
+            // Close Button
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Close';
+            closeBtn.style.cssText = `position: absolute; top: 10px; left: 10px; padding: 5px 10px;`;
+            closeBtn.onclick = () => {
+                document.body.removeChild(modal);
+                statusElement.textContent = 'Huddle Room Closed';
+            };
+
+            // Assemble Modal
+            roomContent.appendChild(indicator);
+            roomContent.appendChild(document.createElement('h3').textContent = 'Huddle Room');
+            roomContent.appendChild(roomSelect);
+            roomContent.appendChild(botContainer);
+            roomContent.appendChild(closeBtn);
+            modal.appendChild(roomContent);
+            document.body.appendChild(modal);
+
+            // Initial Room Setup
+            updateRoom('small');
+
             setTimeout(() => {
                 statusElement.textContent = 'Huddle Room Active';
-                alert('Huddle Room Launched! (Simulated for testing.)');
             }, 1000);
+
         } catch (e) {
             console.error('Huddle Room Error:', e);
         }
