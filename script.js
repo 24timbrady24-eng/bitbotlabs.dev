@@ -1,6 +1,6 @@
-// Dashboard Sim Engineâ„¢ - Simulated logic for BotLogixâ„¢ Dashboard
+// Dashboard Sim Engine™ - Simulated logic for BotLogix™ Dashboard
 try {
-    // BitHumorâ„¢ Quotes Rotation
+    // BitHumor™ Quotes Rotation
     const bitHumorQuotes = [
         "Why did the bit flip? To get to the other side!",
         "Bits walk into a bar: 'We're feeling a bit off today.'",
@@ -34,7 +34,6 @@ try {
             console.error('BibBot Deploy Error:', e);
         }
     }
-
     function checkBibBotStatus() {
         try {
             document.getElementById('bibbot-status').textContent = 'Status: Online and Operational';
@@ -49,49 +48,23 @@ try {
         'SKU-TEST': [85, 90, 75, 80, 95],
         'SKU-001': [65, 70, 60, 75, 85]
     };
-
     function updateSKU() {
         try {
             const sku = document.getElementById('sku-select').value;
             const data = skuData[sku] || [0, 0, 0, 0, 0];
-            const ctx = document.getElementById('skuChart').getContext('2d');
-
-            if (skuChart) skuChart.destroy();
-            skuChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
-                    datasets: [{
-                        label: `${sku} Health`,
-                        data: data,
-                        borderColor: '#0d6efd',
-                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Health Score' } },
-                        x: { title: { display: true, text: 'Time' } }
-                    },
-                    plugins: { legend: { display: true } }
-                }
-            });
+            console.log(`SKU ${sku} data:`, data); // Placeholder log
         } catch (e) {
             console.error('SKU Chart Error:', e);
         }
     }
 
-    // Lifebitsâ„¢
+    // Lifebits™
     const lifebitsData = [
         'Core Functionality: Stable',
         'User Engagement: High',
         'Performance: Optimized',
         'Security: Reinforced'
     ];
-
     function loadLifebits() {
         try {
             const list = document.getElementById('lifebits-list');
@@ -105,7 +78,7 @@ try {
         }
     }
 
-    // Hidden Cost Analyzerâ„¢
+    // Hidden Cost Analyzer™
     function analyzeCosts() {
         try {
             const baseCost = parseFloat(document.getElementById('cost-input').value) || 0;
@@ -130,17 +103,20 @@ try {
         }
     }
 
-    // Initialize
+    // Initialize and Add Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
         try {
             document.getElementById('sku-select').value = 'SKU-TEST';
             updateSKU();
             loadLifebits();
+            document.getElementById('deploy-btn').addEventListener('click', deployBibBot);
+            document.getElementById('huddle-launch').addEventListener('click', launchHuddleRoom);
+            document.getElementById('analyze-costs').addEventListener('click', analyzeCosts);
+            document.getElementById('sku-select').addEventListener('change', updateSKU);
         } catch (e) {
             console.error('Initialization Error:', e);
         }
     });
-
 } catch (e) {
     console.error('Dashboard Sim Engine Error:', e);
 }
