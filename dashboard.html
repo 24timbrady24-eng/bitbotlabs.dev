@@ -8,18 +8,31 @@
 </head>
 <body>
   <h1>Dashboard</h1>
+  <div id="bithumor-quote" class="bithumor"></div>
   <section id="lifebits">
     <h2>Lifebits™</h2>
-    <ul id="lifebits-list">
-      <li>Lifebit 1: Active</li>
-      <li>Lifebit 2: Confirmed</li>
-    </ul>
+    <ul id="lifebits-list"></ul>
   </section>
   <section id="bibbot-controls">
     <h2>BibBot Deployment</h2>
-    <button id="deploy-btn" style="min-width: 120px;">Deploy BibBot</button>
+    <button id="deploy-btn">Deploy BibBot</button>
     <div id="bibbot-status">Status: Idle</div>
     <div id="huddle-status">Ready</div>
+    <button id="huddle-launch">Launch Huddle Room</button>
+  </section>
+  <section id="sku-health">
+    <h2>SKU Health</h2>
+    <select id="sku-select">
+      <option value="SKU-TEST">SKU-TEST</option>
+      <option value="SKU-001">SKU-001</option>
+    </select>
+    <canvas id="skuChart" width="400" height="200"></canvas>
+  </section>
+  <section id="cost-analyzer">
+    <h2>Hidden Cost Analyzer™</h2>
+    <input type="number" id="cost-input" placeholder="Enter base cost">
+    <button id="analyze-costs">Analyze Costs</button>
+    <div id="cost-output"></div>
   </section>
   <script src="script.js"></script>
 </body>
